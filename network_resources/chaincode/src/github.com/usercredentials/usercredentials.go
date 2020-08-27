@@ -1,5 +1,3 @@
-
-
 package main
 
 /* Imports
@@ -20,19 +18,21 @@ import (
 type SmartContract struct {
 }
 
-// Define the car structure, with 4 properties.  Structure tags are used by encoding/json library
+// Defines user struct with ssnAccess property.  Structure tags are used by encoding/json library
 type User struct {
-	ssn   string `json:"ssn"`
-	accessSsn  []string `json:"accessSsn"`
+	ssnAccess  []string `json:"ssnAccess"`
 }
 
-
+/*
+ * The Init method is called when the Smart Contract is instantiated by the blockchain network
+ * Best practice is to have any Ledger initialization in separate function -- see initLedger()
+ */
 func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	return shim.Success(nil)
 }
 
 /*
- * The Invoke method is called as a result of an application request to run the Smart Contract "fabcar"
+ * The Invoke method is called as a result of an application request to run the Smart Contract
  * The calling application program has also specified the particular smart contract function to be called, with arguments
  */
 func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response {
@@ -42,9 +42,7 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 	// Route to the appropriate handler function to interact with the ledger appropriately
 	if function == "queryUser" {
 		return s.queryUser(APIstub, args)
-	} else if function == "initLedger" {
-		return s.initLedger(APIstub)
-	} else if function == "createUser" {
+	}  else if function == "createUser" {
 		return s.createUser(APIstub, args)
 	}
 
@@ -61,36 +59,23 @@ func (s *SmartContract) queryUser(APIstub shim.ChaincodeStubInterface, args []st
 	return shim.Success(userAsBytes)
 }
 
-func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
-	users := []User{
-		User{ssn: "1234-XXX-SSD", accessSsn: []},
-		User{ssn: "2344-XXX-SSS", accessSsn: []},
-	}
-
-	i := 0
-	for i < len(users) {
-		fmt.Println("i is ", i)
-		userAsBytes, _ := json.Marshal(users[i])
-		APIstub.PutState("USER"+strconv.Itoa(i), userAsBytes)
-		fmt.Println("Added", users[i])
-		i = i + 1
-	}
-
-	return shim.Success(nil)
-}
-
 func (s *SmartContract) createUser(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
-	if len(args) != 5 {
-		return shim.Error("Incorrect number of arguments. Expecting 5")
+	if len(args) != 2 {
+		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
 
-	var user = User{ssn: args[1], accessSsn: args[2]}
+	var user User
+	user.ssnAccess = append(user.ssnAccess,args[1])
 
 	userAsBytes, _ := json.Marshal(user)
 	APIstub.PutState(args[0], userAsBytes)
 
 	return shim.Success(nil)
+}
+
+func RemoveIndex(s []string, index int) []string {
+	return append(s[:index], s[index+1:]...)
 }
 
 // The main function is only relevant in unit test mode. Only included here for completeness.
