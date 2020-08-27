@@ -1,18 +1,6 @@
 # Create and Deploy a Blockchain Network using Hyperledger Fabric SDK Java
 
-Blockchain is a shared, immutable ledger for recording the history of transactions. The Linux Foundation’s Hyperledger Fabric, the software implementation of blockchain IBM is committed to, is a permissioned network. Hyperledger Fabric is a platform for distributed ledger solutions underpinned by a modular architecture delivering high degrees of confidentiality, resiliency, flexibility and scalability.
-
-In a Blockchain solution, the Blockchain network works as a back-end with an application front-end to communicate with the network using a SDK. To set up the communication between front-end and back-end, Hyperledger Fabric community offers a number of SDKs for a wide variety of programming languages like the NodeJS SDK and Java SDK. This code pattern explains the methodology to create, deploy and test the blockchain network using Hyperledger Fabric SDK Java.
-
-It would be helpful for the Java developers, who started to look into Hyperledger Fabric platform and would like to use Fabric SDK Java for their projects. The SDK helps facilitate Java applications to manage the lifecycle of Hyperledger channels and user chaincode. The SDK also provides a means to execute user chaincode, query blocks and transactions on the channel, and monitor events on the channel. This code pattern will help to get the process started to build a Hyperledger Fabric v1.4.1 Java application.
-
-When the reader has completed this pattern, they will understand how to create, deploy and test a blockchain network using Hyperledger Fabric SDK Java. This pattern will provision a Hyperledger Fabric 1.4.1 network consisting of two organizations, each maintaining two peer node, two certificate authorities (ca) for each organization and a solo ordering service. The following aspects will be demonstrated in this code pattern:
-* Create and initialize channel
-* Install and instantiate chain code
-* Register and enroll the users
-* Perform invoke and query on the blockchain network.
-
-> **Note:** This code pattern builds a Hyperledger Fabric 1.4.1 network and uses Hyperledger Fabric SDK java 1.4.1 .
+> **Note:** This code pattern builds a Hyperledger Fabric 1.4 network and uses Hyperledger Fabric SDK java 1.4
 
 ## Flow
 
@@ -41,8 +29,6 @@ When the reader has completed this pattern, they will understand how to create, 
 
 * [Java](https://en.wikipedia.org/wiki/Java_(programming_language)): Java is a general-purpose computer-programming language that is concurrent, class-based and object-oriented.
 
-## Watch the Video
-[![](https://img.youtube.com/vi/vCTabgkvfS0/0.jpg)](https://youtu.be/vCTabgkvfS0)]
 
 ## Pre-requisites
 
@@ -170,32 +156,41 @@ This code pattern uses a sample chaincode `fabcar` to demo the usage of Hyperled
 
    Output:
 
-   ```Apr 23, 2018 10:25:22 AM org.example.client.FabricClient deployChainCode
-      INFO: Deploying chaincode fabcar using Fabric client Org1MSP admin
-      Apr 23, 2018 10:25:22 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code deployment SUCCESS
-      Apr 23, 2018 10:25:22 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code deployment SUCCESS
-      Apr 23, 2018 10:25:22 AM org.example.client.FabricClient deployChainCode
-      INFO: Deploying chaincode fabcar using Fabric client Org2MSP admin
-      Apr 23, 2018 10:25:22 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code deployment SUCCESS
-      Apr 23, 2018 10:25:22 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code deployment SUCCESS
-      Apr 23, 2018 10:25:22 AM org.example.client.ChannelClient instantiateChainCode
-      INFO: Instantiate proposal request fabcar on channel mychannel with Fabric client Org2MSP admin
-      Apr 23, 2018 10:25:22 AM org.example.client.ChannelClient instantiateChainCode
-      INFO: Instantiating Chaincode ID fabcar on channel mychannel
-      Apr 23, 2018 10:25:25 AM org.example.client.ChannelClient instantiateChainCode
-      INFO: Chaincode fabcar on channel mychannel instantiation java.util.concurrent.CompletableFuture@723ca036[Not completed]
-      Apr 23, 2018 10:25:25 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code instantiation SUCCESS
-      Apr 23, 2018 10:25:25 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code instantiation SUCCESS
-      Apr 23, 2018 10:25:25 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code instantiation SUCCESS
-      Apr 23, 2018 10:25:25 AM org.example.network.DeployInstantiateChaincode main
-      INFO: fabcar- Chain code instantiation SUCCESS
+   ```
+      log4j:WARN No appenders could be found for logger (org.hyperledger.fabric.sdk.helper.Config).
+      log4j:WARN Please initialize the log4j system properly.
+      log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+      WARNING: An illegal reflective access operation has occurred
+      WARNING: Illegal reflective access by org.bouncycastle.jcajce.provider.drbg.DRBG (file:/Users/bala/Desktop/workwolf/blockchain-application-using-fabric-java-sdk/network_resources/blockchain-client.jar) to constructor sun.security.provider.Sun()
+      WARNING: Please consider reporting this to the maintainers of org.bouncycastle.jcajce.provider.drbg.DRBG
+      WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+      WARNING: All illegal access operations will be denied in a future release
+      Aug. 27, 2020 3:59:55 P.M. org.example.client.FabricClient deployChainCode
+      INFO: Deploying chaincode usercredentials using Fabric client Org1MSP admin
+      Aug. 27, 2020 3:59:55 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code deployment SUCCESS
+      Aug. 27, 2020 3:59:55 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code deployment SUCCESS
+      Aug. 27, 2020 3:59:55 P.M. org.example.client.FabricClient deployChainCode
+      INFO: Deploying chaincode usercredentials using Fabric client Org2MSP admin
+      Aug. 27, 2020 3:59:55 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code deployment SUCCESS
+      Aug. 27, 2020 3:59:55 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code deployment SUCCESS
+      Aug. 27, 2020 3:59:55 P.M. org.example.client.ChannelClient instantiateChainCode
+      INFO: Instantiate proposal request usercredentials on channel mychannel with Fabric client Org2MSP admin
+      Aug. 27, 2020 3:59:55 P.M. org.example.client.ChannelClient instantiateChainCode
+      INFO: Instantiating Chaincode ID usercredentials on channel mychannel
+      Aug. 27, 2020 4:00:34 P.M. org.example.client.ChannelClient instantiateChainCode
+      INFO: Chaincode usercredentials on channel mychannel instantiation java.util.concurrent.CompletableFuture@9cd25ff[Not completed]
+      Aug. 27, 2020 4:00:34 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code instantiation SUCCESS
+      Aug. 27, 2020 4:00:34 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code instantiation SUCCESS
+      Aug. 27, 2020 4:00:34 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code instantiation SUCCESS
+      Aug. 27, 2020 4:00:34 P.M. org.example.network.DeployInstantiateChaincode main
+      INFO: usercredentials- Chain code instantiation SUCCESS
    ```
 
    > **Note:** The chaincode fabcar.go was taken from the fabric samples available at - https://github.com/hyperledger/fabric-samples/tree/release-1.4/chaincode/fabcar/go.
@@ -233,19 +228,28 @@ Blockchain network has been setup completely and is ready to use. Now we can tes
 
    Output:
 
-   ```Apr 20, 2018 5:13:03 PM org.example.client.CAClient enrollAdminUser
-     INFO: CA -http://localhost:7054 Enrolled Admin.
-     Apr 20, 2018 5:13:04 PM org.example.client.ChannelClient sendTransactionProposal
-     INFO: Sending transaction proposal on channel mychannel
-     Apr 20, 2018 5:13:04 PM org.example.client.ChannelClient sendTransactionProposal
-     INFO: Transaction proposal on channel mychannel OK SUCCESS with transaction
-     id:a298b9e27bdb0b6ca18b19f9c78a5371fb4d9b8dd199927baf37379537ca0d0f
-     Apr 20, 2018 5:13:04 PM org.example.client.ChannelClient sendTransactionProposal
-     INFO:
-     Apr 20, 2018 5:13:04 PM org.example.client.ChannelClient sendTransactionProposal
-     INFO: java.util.concurrent.CompletableFuture@22f31dec[Not completed]
-     Apr 20, 2018 5:13:04 PM org.example.chaincode.invocation.InvokeChaincode main
-     INFO: Invoked createCar on fabcar. Status - SUCCESS
+   ```Aug. 27, 2020 4:01:21 P.M. org.example.util.Util deleteDirectory
+      INFO: Deleting - users
+      log4j:WARN No appenders could be found for logger (org.hyperledger.fabric.sdk.helper.Config).
+      log4j:WARN Please initialize the log4j system properly.
+      log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+      WARNING: An illegal reflective access operation has occurred
+      WARNING: Illegal reflective access by org.bouncycastle.jcajce.provider.drbg.DRBG (file:/Users/bala/Desktop/workwolf/blockchain-application-using-fabric-java-sdk/network_resources/blockchain-client.jar) to constructor sun.security.provider.Sun()
+      WARNING: Please consider reporting this to the maintainers of org.bouncycastle.jcajce.provider.drbg.DRBG
+      WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+      WARNING: All illegal access operations will be denied in a future release
+      Aug. 27, 2020 4:01:22 P.M. org.example.client.CAClient enrollAdminUser
+      INFO: CA -http://localhost:7054 Enrolled Admin.
+      Aug. 27, 2020 4:01:22 P.M. org.example.client.ChannelClient sendTransactionProposal
+      INFO: Sending transaction proposal on channel mychannel
+      Aug. 27, 2020 4:01:22 P.M. org.example.client.ChannelClient sendTransactionProposal
+      INFO: Transaction proposal on channel mychannel  SUCCESS with transaction id:46a42e0448a8ada971e473cc0b868ebdc124b60d9ef05be2d62c733be836ddf4
+      Aug. 27, 2020 4:01:22 P.M. org.example.client.ChannelClient sendTransactionProposal
+      INFO: 
+      Aug. 27, 2020 4:01:22 P.M. org.example.client.ChannelClient sendTransactionProposal
+      INFO: java.util.concurrent.CompletableFuture@7c8326a4[Not completed]
+      Aug. 27, 2020 4:01:22 P.M. org.example.chaincode.invocation.InvokeChaincode main
+      INFO: Invoked createUser on usercredentials. Status - SUCCESS
   ```
 
    ```
@@ -254,29 +258,32 @@ Blockchain network has been setup completely and is ready to use. Now we can tes
 
    Output:
 
-   <pre>
-    Apr 20, 2018 5:13:28 PM org.example.client.CAClient enrollAdminUser
+   ```
+    Aug. 27, 2020 4:02:22 P.M. org.example.util.Util deleteDirectory
+    INFO: Deleting - admin.ser
+    Aug. 27, 2020 4:02:22 P.M. org.example.util.Util deleteDirectory
+    INFO: Deleting - org1
+    Aug. 27, 2020 4:02:22 P.M. org.example.util.Util deleteDirectory
+    INFO: Deleting - users
+    log4j:WARN No appenders could be found for logger (org.hyperledger.fabric.sdk.helper.Config).
+    log4j:WARN Please initialize the log4j system properly.
+    log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+    WARNING: An illegal reflective access operation has occurred
+    WARNING: Illegal reflective access by org.bouncycastle.jcajce.provider.drbg.DRBG (file:/Users/bala/Desktop/workwolf/blockchain-application-using-fabric-java-sdk/network_resources/blockchain-client.jar) to constructor sun.security.provider.Sun()
+    WARNING: Please consider reporting this to the maintainers of org.bouncycastle.jcajce.provider.drbg.DRBG
+    WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+    WARNING: All illegal access operations will be denied in a future release
+    Aug. 27, 2020 4:02:23 P.M. org.example.client.CAClient enrollAdminUser
     INFO: CA -http://localhost:7054 Enrolled Admin.
-    Apr 20, 2018 5:13:29 PM org.example.chaincode.invocation.QueryChaincode main
-    INFO: <b>Querying for all cars ...</b>
-    Apr 20, 2018 5:13:29 PM org.example.client.ChannelClient queryByChainCode
-    INFO: Querying queryAllCars on channel mychannel
-    Apr 20, 2018 5:13:29 PM org.example.chaincode.invocation.QueryChaincode main
-    INFO: <b>[{"Key":"CAR1", "Record":{"make":"Chevy","model":"Volt","colour":"Red","owner":"Nick"}}]</b>
-    Apr 20, 2018 5:13:39 PM org.example.chaincode.invocation.QueryChaincode main
-    INFO: <b>Querying for a car - CAR1</b>
-    Apr 20, 2018 5:13:39 PM org.example.client.ChannelClient queryByChainCode
-    INFO: Querying queryCar on channel mychannel
-    Apr 20, 2018 5:13:39 PM org.example.chaincode.invocation.QueryChaincode main
-    INFO: <b>{"make":"Chevy","model":"Volt","colour":"Red","owner":"Nick"}</b>
-   </pre>
+    Aug. 27, 2020 4:02:23 P.M. org.example.chaincode.invocation.QueryChaincode main
+    INFO: Querying for a user - USER1
+    Aug. 27, 2020 4:02:23 P.M. org.example.client.ChannelClient queryByChainCode
+    INFO: Querying queryUser on channel mychannel
+    Aug. 27, 2020 4:02:23 P.M. org.example.chaincode.invocation.QueryChaincode main
+    INFO: {"ssnAccess":["USER2"]}
+   ```
 
 ## Troubleshooting
 
 [See DEBUGGING.md.](DEBUGGING.md)
-
-## License
-This code pattern is licensed under the Apache Software License, Version 2.  Separate third party code objects invoked within this code pattern are licensed by their respective providers pursuant to their own separate licenses. Contributions are subject to the [Developer Certificate of Origin, Version 1.1 (DCO)](https://developercertificate.org/) and the [Apache Software License, Version 2](https://www.apache.org/licenses/LICENSE-2.0.txt).
-
-[Apache Software License (ASL) FAQ](https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN)
 
