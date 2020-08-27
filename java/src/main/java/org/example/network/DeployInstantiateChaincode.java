@@ -89,37 +89,37 @@ public class DeployInstantiateChaincode {
 			org2Peers.add(peer0_org2);
 			org2Peers.add(peer1_org2);
 			
-			Collection<ProposalResponse> response = fabClient.deployChainCode(Config.CHAINCODE_1_NAME,
-					Config.CHAINCODE_1_PATH, Config.CHAINCODE_ROOT_DIR, Type.GO_LANG.toString(),
-					Config.CHAINCODE_1_VERSION, org1Peers);
+			Collection<ProposalResponse> response = fabClient.deployChainCode(Config.CHAINCODE_2_NAME,
+					Config.CHAINCODE_2_PATH, Config.CHAINCODE_ROOT_DIR, Type.GO_LANG.toString(),
+					Config.CHAINCODE_2_VERSION, org1Peers);
 			
 			
 			for (ProposalResponse res : response) {
 				Logger.getLogger(DeployInstantiateChaincode.class.getName()).log(Level.INFO,
-						Config.CHAINCODE_1_NAME + "- Chain code deployment " + res.getStatus());
+						Config.CHAINCODE_2_NAME + "- Chain code deployment " + res.getStatus());
 			}
 
 			fabClient.getInstance().setUserContext(org2Admin);
 			
-			response = fabClient.deployChainCode(Config.CHAINCODE_1_NAME,
-					Config.CHAINCODE_1_PATH, Config.CHAINCODE_ROOT_DIR, Type.GO_LANG.toString(),
-					Config.CHAINCODE_1_VERSION, org2Peers);
+			response = fabClient.deployChainCode(Config.CHAINCODE_2_NAME,
+					Config.CHAINCODE_2_PATH, Config.CHAINCODE_ROOT_DIR, Type.GO_LANG.toString(),
+					Config.CHAINCODE_2_VERSION, org2Peers);
 			
 			
 			for (ProposalResponse res : response) {
 				Logger.getLogger(DeployInstantiateChaincode.class.getName()).log(Level.INFO,
-						Config.CHAINCODE_1_NAME + "- Chain code deployment " + res.getStatus());
+						Config.CHAINCODE_2_NAME + "- Chain code deployment " + res.getStatus());
 			}
 			
 			ChannelClient channelClient = new ChannelClient(mychannel.getName(), mychannel, fabClient);
 
 			String[] arguments = { "" };
-			response = channelClient.instantiateChainCode(Config.CHAINCODE_1_NAME, Config.CHAINCODE_1_VERSION,
-					Config.CHAINCODE_1_PATH, Type.GO_LANG.toString(), "init", arguments, null);
+			response = channelClient.instantiateChainCode(Config.CHAINCODE_2_NAME, Config.CHAINCODE_2_VERSION,
+					Config.CHAINCODE_2_PATH, Type.GO_LANG.toString(), "init", arguments, null);
 
 			for (ProposalResponse res : response) {
 				Logger.getLogger(DeployInstantiateChaincode.class.getName()).log(Level.INFO,
-						Config.CHAINCODE_1_NAME + "- Chain code instantiation " + res.getStatus());
+						Config.CHAINCODE_2_NAME + "- Chain code instantiation " + res.getStatus());
 			}
 
 		} catch (Exception e) {

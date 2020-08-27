@@ -63,8 +63,13 @@ public class Config {
 	public static final String CHAINCODE_1_NAME = "fabcar";
 	
 	public static final String CHAINCODE_1_PATH = "github.com/fabcar";
-	
+
 	public static final String CHAINCODE_1_VERSION = "1";
 
+	public static final String CHAINCODE_2_NAME = "usercredentials";
+
+	public static final String CHAINCODE_2_PATH = "github.com/usercredentials";
+
+	public static final String CHAINCODE_2_VERSION = "1";
 
 }
