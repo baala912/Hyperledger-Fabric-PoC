@@ -17,7 +17,7 @@ type SmartContract struct {
 
 // Defines user struct with ssnAccess property.  Structure tags are used by encoding/json library
 type User struct {
-	ssnAccess  []string `json:"ssnAccess"`
+	SsnAccess  []string `json:"ssnAccess"`
 }
 
 /*
@@ -63,7 +63,7 @@ func (s *SmartContract) createUser(APIstub shim.ChaincodeStubInterface, args []s
 	}
 
 	var user User
-	user.ssnAccess = append(user.ssnAccess,args[1])
+	user.SsnAccess = append(user.SsnAccess,args[1])
 
 	userAsBytes, _ := json.Marshal(user)
 	APIstub.PutState(args[0], userAsBytes)
