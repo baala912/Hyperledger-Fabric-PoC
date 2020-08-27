@@ -1,15 +1,3 @@
-/****************************************************** 
- *  Copyright 2018 IBM Corporation 
- *  Licensed under the Apache License, Version 2.0 (the "License"); 
- *  you may not use this file except in compliance with the License. 
- *  You may obtain a copy of the License at 
- *  http://www.apache.org/licenses/LICENSE-2.0 
- *  Unless required by applicable law or agreed to in writing, software 
- *  distributed under the License is distributed on an "AS IS" BASIS, 
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
- *  See the License for the specific language governing permissions and 
- *  limitations under the License.
- */ 
 package org.example.chaincode.invocation;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -72,10 +60,10 @@ public class InvokeChaincode {
 			channel.initialize();
 
 			TransactionProposalRequest request = fabClient.getInstance().newTransactionProposalRequest();
-			ChaincodeID ccid = ChaincodeID.newBuilder().setName(Config.CHAINCODE_1_NAME).build();
+			ChaincodeID ccid = ChaincodeID.newBuilder().setName(Config.CHAINCODE_2_NAME).build();
 			request.setChaincodeID(ccid);
-			request.setFcn("createCar");
-			String[] arguments = { "CAR1", "Chevy", "Volt", "Red", "Nick" };
+			request.setFcn("createUser");
+			String[] arguments = { "USER1", "USER2"};
 			request.setArgs(arguments);
 			request.setProposalWaitTime(1000);
 
@@ -88,7 +76,7 @@ public class InvokeChaincode {
 			Collection<ProposalResponse> responses = channelClient.sendTransactionProposal(request);
 			for (ProposalResponse res: responses) {
 				Status status = res.getStatus();
-				Logger.getLogger(InvokeChaincode.class.getName()).log(Level.INFO,"Invoked createCar on "+Config.CHAINCODE_1_NAME + ". Status - " + status);
+				Logger.getLogger(InvokeChaincode.class.getName()).log(Level.INFO,"Invoked createUser on "+Config.CHAINCODE_2_NAME + ". Status - " + status);
 			}
 									
 		} catch (Exception e) {
